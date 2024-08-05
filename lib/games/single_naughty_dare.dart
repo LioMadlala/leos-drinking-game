@@ -4,7 +4,7 @@ import '../models/user_model.dart';
 
 class SingleNaughtyDare implements BaseGame {
   @override
-  String get name => 'Random Dare';
+  String get name => 'Naughty Dare 🤭';
 
   @override
   String get type => 'dare';

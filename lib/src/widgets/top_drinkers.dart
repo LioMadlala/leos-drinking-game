@@ -10,8 +10,8 @@ Column top3Drinkers(GameProvider gameProvider, BuildContext context) {
         TopUsersShowcase(
           topUsers: [
             gameProvider.users[0],
-            gameProvider.users[1],
-            gameProvider.users[2],
+            if (gameProvider.users.length > 1) gameProvider.users[1],
+            if (gameProvider.users.length > 2) gameProvider.users[2],
           ],
         ),
       Container(),

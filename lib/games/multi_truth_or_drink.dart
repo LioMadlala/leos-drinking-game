@@ -2,9 +2,9 @@ import 'dart:math';
 import 'base_game.dart';
 import '../models/user_model.dart';
 
-class TrueOrFalse implements BaseGame {
+class MultiTruthOrDrink implements BaseGame {
   @override
-  String get name => 'True or False';
+  String get name => 'True or Drink';
 
   @override
   String get type => 'true_false';

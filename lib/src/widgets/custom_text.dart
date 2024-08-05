@@ -20,15 +20,15 @@ class CustomTextWidget extends StatelessWidget {
               padding:
                   const EdgeInsets.symmetric(horizontal: 8.0, vertical: 2.0),
               decoration: BoxDecoration(
-                color: Colors.blue.shade100,
+                color: Colors.white,
                 borderRadius: BorderRadius.circular(10),
               ),
               transform: Matrix4.rotationZ(-0.03),
               child: Text(
                 word,
                 style: const TextStyle(
-                  color: Colors.black,
-                  fontSize: 11,
+                  color: Colors.blue,
+                  fontSize: 12,
                   fontWeight: FontWeight.bold,
                 ),
               ),

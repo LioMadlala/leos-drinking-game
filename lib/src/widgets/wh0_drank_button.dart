@@ -1,13 +1,14 @@
 import 'package:flutter/material.dart';
+import 'package:leos_drinking_game/models/user_model.dart';
 
 class WhoDrankButton extends StatelessWidget {
-  final String name;
+  final UserModel user;
   final bool isSelected;
   final Function() onTap;
 
   const WhoDrankButton(
       {super.key,
-      required this.name,
+      required this.user,
       required this.isSelected,
       required this.onTap});
 
@@ -47,6 +48,20 @@ class WhoDrankButton extends StatelessWidget {
           ),
           child: Row(
             children: [
+              Image.asset(
+                user.imoji,
+                width: 25,
+                height: 25,
+              ),
+              const SizedBox(width: 10),
+              Text(
+                user.name,
+                style: const TextStyle(
+                  fontSize: 12,
+                  color: Colors.black,
+                ),
+              ),
+              const Spacer(),
               Container(
                 height: 20,
                 width: 20,
@@ -54,20 +69,12 @@ class WhoDrankButton extends StatelessWidget {
                   color: Colors.grey[200],
                   borderRadius: BorderRadius.circular(30),
                 ),
-                child: const Center(
+                child: Center(
                   child: Icon(
                     Icons.check,
-                    size: 12,
-                    color: Colors.green,
+                    size: 14,
+                    color: isSelected ? Colors.greenAccent : Colors.grey[400],
                   ),
-                ),
-              ),
-              const SizedBox(width: 10),
-              Text(
-                name,
-                style: const TextStyle(
-                  fontSize: 12,
-                  color: Colors.black,
                 ),
               ),
             ],

@@ -23,27 +23,38 @@ class TopUsersShowcase extends StatelessWidget {
         Column(
           // mainAxisAlignment: MainAxisAlignment.start,
           crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            if (topUsers[0].amountOfDrinksHad > 0)
-              _buildUserAvatar(
-                context: context,
-                position: 0,
-                user: topUsers[0],
-              ),
-            if (topUsers[1].amountOfDrinksHad > 0)
-              _buildUserAvatar(
-                context: context,
-                position: 1,
-                user: topUsers[1],
-              ),
-            if (topUsers[2].amountOfDrinksHad > 0)
-              _buildUserAvatar(
-                context: context,
-                position: 2,
-                user: topUsers[2],
-              ),
-          ],
+          children: topUsers.map((user) {
+            return _buildUserAvatar(
+              context: context,
+              user: user,
+              position: topUsers.indexOf(user),
+            );
+          }).toList(),
         ),
+        // Column(
+        //   // mainAxisAlignment: MainAxisAlignment.start,
+        //   crossAxisAlignment: CrossAxisAlignment.start,
+        //   children: [
+        //     if (topUsers[0].amountOfDrinksHad > 0)
+        //       _buildUserAvatar(
+        //         context: context,
+        //         position: 0,
+        //         user: topUsers[0],
+        //       ),
+        //     if (topUsers[1].amountOfDrinksHad > 0)
+        //       _buildUserAvatar(
+        //         context: context,
+        //         position: 1,
+        //         user: topUsers[1],
+        //       ),
+        //     if (topUsers[2].amountOfDrinksHad > 0)
+        //       _buildUserAvatar(
+        //         context: context,
+        //         position: 2,
+        //         user: topUsers[2],
+        //       ),
+        //   ],
+        // ),
       ],
     );
   }

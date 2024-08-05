@@ -3,7 +3,7 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:leos_drinking_game/games/base_game.dart';
 import 'package:leos_drinking_game/games/everyone_drinks.dart';
-import 'package:leos_drinking_game/games/true_or_false.dart';
+import 'package:leos_drinking_game/games/multi_truth_or_drink.dart';
 import 'package:leos_drinking_game/models/user_model.dart';
 import 'package:leos_drinking_game/service/game_service.dart';
 
@@ -22,6 +22,7 @@ class GameProvider with ChangeNotifier {
   GameProvider(this._gameService);
 
   List<UserModel> get users {
+    loadUsers();
     List<UserModel> sortedUsers = List.from(_users);
     sortedUsers
         .sort((a, b) => b.amountOfDrinksHad.compareTo(a.amountOfDrinksHad));
@@ -42,7 +43,7 @@ class GameProvider with ChangeNotifier {
   }
 
   gameWithPrompt() {
-    if (currentGame is TrueOrFalse) {
+    if (currentGame is MultiTruthOrDrink) {
       _selectedUsers = _users;
     }
     return GameWithPrompt(
@@ -74,6 +75,7 @@ class GameProvider with ChangeNotifier {
 
   Future<void> addUser(String name) async {
     isLoadingData();
+
     final newUser = UserModel(
       id: DateTime.now().toString(),
       name: name,

@@ -3,11 +3,12 @@ import 'package:infinite_carousel/infinite_carousel.dart';
 import 'package:leos_drinking_game/games/everyone_drinks.dart';
 import 'package:leos_drinking_game/games/multi_naughty_dare.dart';
 import 'package:leos_drinking_game/games/single_naughty_dare.dart';
-import 'package:leos_drinking_game/games/single_naughty_question.dart';
-import 'package:leos_drinking_game/games/single_soft_question.dart';
-import 'package:leos_drinking_game/games/true_or_false.dart';
+import 'package:leos_drinking_game/games/single_naughty_answer_or_drink.dart';
+import 'package:leos_drinking_game/games/single_player_truth_or_drink.dart';
+import 'package:leos_drinking_game/games/multi_truth_or_drink.dart';
 import 'package:leos_drinking_game/models/select_game_mode.dart';
 import 'package:leos_drinking_game/providers/game_provider.dart';
+import 'package:leos_drinking_game/src/add_player/add_player.dart';
 import 'package:leos_drinking_game/src/choose_game/game_screen.dart';
 import 'package:provider/provider.dart';
 
@@ -30,10 +31,10 @@ class _ChooseGameState extends State<ChooseGame> {
       description: "Sit back and let me get yall drunk",
       games: [
         EveryoneDrinks(),
-        RandomNaughtyQuestion(),
+        NaughtyAnswerOrDrink(),
         SingleNaughtyDare(),
-        RandomSoftQuestion(),
-        TrueOrFalse(),
+        SingleTruthOrDrink(),
+        MultiTruthOrDrink(),
         MultiNaughtyDare(),
       ],
     ),
@@ -63,28 +64,28 @@ class _ChooseGameState extends State<ChooseGame> {
       name: "Soft Questions",
       description: "description",
       games: [
-        RandomSoftQuestion(),
+        SingleTruthOrDrink(),
       ],
     ),
     GameMode(
       name: "Naughty Naughty Questions",
       description: "description",
       games: [
-        RandomNaughtyQuestion(),
+        NaughtyAnswerOrDrink(),
       ],
     ),
     GameMode(
       name: "Soft True or False",
       description: "description",
       games: [
-        TrueOrFalse(),
+        MultiTruthOrDrink(),
       ],
     ),
     GameMode(
       name: "Naughty True or False",
       description: "description",
       games: [
-        TrueOrFalse(),
+        MultiTruthOrDrink(),
       ],
     ),
   ];
@@ -151,9 +152,18 @@ class _ChooseGameState extends State<ChooseGame> {
                         GameMode currentGameMode = gameModes[itemIndex];
                         return InkWell(
                           onTap: () {
-                            gameProvider.addGames(currentGameMode.games);
-                            Navigator.of(context)
-                                .pushNamed(GameScreen.routeName);
+                            if (gameProvider.users.length < 2) {
+                              Navigator.of(context)
+                                  .pushNamed(AddPlayer.routeName);
+                            } else {
+                              gameProvider.addGames(currentGameMode.games);
+                              Navigator.of(context)
+                                  .pushNamed(GameScreen.routeName);
+                            }
+
+                            // gameProvider.addGames(currentGameMode.games);
+                            // Navigator.of(context)
+                            //     .pushNamed(GameScreen.routeName);
                           },
                           child: Padding(
                             padding: const EdgeInsets.all(6.0),

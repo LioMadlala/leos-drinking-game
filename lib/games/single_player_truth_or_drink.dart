@@ -2,9 +2,9 @@ import 'dart:math';
 import 'base_game.dart';
 import '../models/user_model.dart';
 
-class RandomSoftQuestion implements BaseGame {
+class SingleTruthOrDrink implements BaseGame {
   @override
-  String get name => 'Random Truth';
+  String get name => 'Truth or Drink';
 
   @override
   String get type => 'truth';

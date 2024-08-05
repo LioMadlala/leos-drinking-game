@@ -21,15 +21,48 @@ class AllPlayersList extends StatelessWidget {
     final users = gameProvider.users;
 
     if (users.isEmpty) {
-      return const Center(
-        child: Text("No users found"),
+      return Center(
+        child: Column(
+          children: [
+            Image.asset(
+              'assets/ios-images/Person=Ed, Skin Tone=White, Posture=24 Fisting.png',
+              scale: 2,
+            ),
+            const Text(
+              "Let's add some Drinkers!",
+              style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+            ),
+          ],
+        ),
       );
     }
+    // ignore: prefer_is_empty
+    if (users.length == 1) {
+      return Center(
+        child: Column(
+          children: [
+            usersListview(users),
+            Image.asset(
+              'assets/ios-images/Person=Ed, Skin Tone=White, Posture=17 Happy Winking.png',
+              scale: 2,
+            ),
+            const Text(
+              "Let's add one more Drinker!",
+              style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+            ),
+          ],
+        ),
+      );
+    }
+    return usersListview(users);
+  }
+
+  Column usersListview(List<UserModel> users) {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       mainAxisAlignment: MainAxisAlignment.start,
       children: [
-        top3Drinkers(gameProvider, context),
+        // top3Drinkers(gameProvider, context),
         ListView.builder(
           shrinkWrap: true,
           physics: const NeverScrollableScrollPhysics(),
@@ -61,10 +94,11 @@ class UserCard extends StatelessWidget {
       padding: const EdgeInsets.all(8),
       decoration: BoxDecoration(
         color: Colors.grey.shade100,
-        gradient: LinearGradient(
+        gradient: const LinearGradient(
+          end: Alignment.bottomRight,
           colors: [
-            const Color(0xFFffa585).withOpacity(0.3),
-            const Color(0xFFffeda0).withOpacity(0.3),
+            Colors.white,
+            Colors.white,
           ],
         ),
         borderRadius: BorderRadius.circular(10),
@@ -74,9 +108,10 @@ class UserCard extends StatelessWidget {
         children: [
           Row(
             children: [
-              const Text(
-                "😎",
-                style: TextStyle(fontSize: 20),
+              Image.asset(
+                user.imoji,
+                width: 40,
+                height: 40,
               ),
               const SizedBox(width: 6),
               Column(
