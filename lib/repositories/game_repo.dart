@@ -42,6 +42,8 @@ class UserRepository {
 }
 
 class GameRepository {
+  var users = UserRepository()._users;
+
   List<BaseGame> games = [
     // EveryoneDrinks(),
     // RandomNaughtyQuestion(),
@@ -56,7 +58,8 @@ class GameRepository {
               id: game.type,
               name: game.name,
               type: game.type,
-              numberOfPlayers: game.numberOfPlayers,
+              numberOfPlayers: users.length,
+              // numberOfPlayers: game.numberOfPlayers,
             ))
         .toList();
   }

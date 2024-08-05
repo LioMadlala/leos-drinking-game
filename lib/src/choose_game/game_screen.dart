@@ -56,6 +56,7 @@ class _GameScreenState extends State<GameScreen> {
                 }
                 return SingleChildScrollView(
                   physics: const BouncingScrollPhysics(),
+                  clipBehavior: Clip.none,
                   child: Padding(
                     padding: const EdgeInsets.symmetric(horizontal: 16.0),
                     child: Column(
@@ -206,6 +207,9 @@ class _GameScreenState extends State<GameScreen> {
                               const SizedBox(height: 10),
                             ],
                           ),
+                        ),
+                        const SizedBox(
+                          height: 200,
                         ),
                       ],
                     ),

@@ -3,6 +3,7 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:leos_drinking_game/games/base_game.dart';
 import 'package:leos_drinking_game/games/everyone_drinks.dart';
+import 'package:leos_drinking_game/games/true_or_false.dart';
 import 'package:leos_drinking_game/models/user_model.dart';
 import 'package:leos_drinking_game/service/game_service.dart';
 
@@ -41,6 +42,9 @@ class GameProvider with ChangeNotifier {
   }
 
   gameWithPrompt() {
+    if (currentGame is TrueOrFalse) {
+      _selectedUsers = _users;
+    }
     return GameWithPrompt(
       name: currentGame.name,
       type: currentGame.type,
@@ -106,7 +110,6 @@ class GameProvider with ChangeNotifier {
     } else {
       whoDrinks.add(user);
     }
-    checkWhoDrinks();
     notifyListeners();
   }
 
