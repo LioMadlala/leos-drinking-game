@@ -2,7 +2,7 @@ import 'dart:math';
 import 'base_game.dart';
 import '../models/user_model.dart';
 
-class RandomTruth implements BaseGame {
+class RandomSoftQuestion implements BaseGame {
   @override
   String get name => 'Random Truth';
 
@@ -18,6 +18,8 @@ class RandomTruth implements BaseGame {
     "What's your biggest regret?",
     "What's the craziest thing you've done in the name of love?",
     "What's one thing you'd change about yourself if you could?",
+    "What's the most illegal thing you've ever done?",
+    "What's the most embarrassing thing you've ever done?",
   ];
 
   @override

@@ -13,6 +13,7 @@ import 'package:leos_drinking_game/src/choose_game/selected_players.dart';
 import 'package:leos_drinking_game/src/choose_game/top_drinkers.dart';
 import 'package:leos_drinking_game/src/choose_game/top_drinkers2.dart';
 import 'package:leos_drinking_game/src/choose_game/top_users.dart';
+import 'package:leos_drinking_game/src/widgets/wh0_drank_button.dart';
 import 'package:provider/provider.dart';
 import 'package:wolt_modal_sheet/wolt_modal_sheet.dart';
 
@@ -97,22 +98,7 @@ class _GameScreenState extends State<GameScreen> {
                                   gameProvider: gameProvider,
                                 ),
                                 const SizedBox(height: 20),
-                                Container(
-                                  padding: const EdgeInsets.symmetric(
-                                      horizontal: 8, vertical: 2),
-                                  decoration: BoxDecoration(
-                                    color: Colors.orangeAccent.withOpacity(0.2),
-                                    borderRadius: BorderRadius.circular(30),
-                                  ),
-                                  child: Text(
-                                    gameProvider.currentGame.name,
-                                    style: const TextStyle(
-                                      fontSize: 12,
-                                      fontWeight: FontWeight.w500,
-                                    ),
-                                  ),
-                                ),
-                                const SizedBox(height: 10),
+
                                 Container(
                                   padding: const EdgeInsets.symmetric(
                                       horizontal: 8, vertical: 80),
@@ -130,9 +116,9 @@ class _GameScreenState extends State<GameScreen> {
                                   ),
                                   child: Center(
                                     child: CustomTextWidget(
-                                      inputText: (gameProvider.currentGame
-                                          .getPrompt(
-                                              gameProvider.selectedUsers)),
+                                      inputText: (gameProvider
+                                          .gameWithPrompt()
+                                          .prompt),
                                     ),
                                   ),
                                   // child: Center(
@@ -164,8 +150,55 @@ class _GameScreenState extends State<GameScreen> {
                                 //             .ms) // runs after the above w/new duration
                                 // ,
                                 const SizedBox(height: 8),
+                                // const Text(
+                                //     "Show Players that must drink, user than selects who drank before pressing next"),
+                                // top3Drinkers2(gameProvider, context),
+                                Container(
+                                    padding: const EdgeInsets.symmetric(
+                                      // horizontal: 6,
+                                      vertical: 6,
+                                    ),
+                                    child: Column(
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.start,
+                                      children: [
+                                        const Text(
+                                          "Who drank? 🤭",
+                                          style: TextStyle(
+                                            fontSize: 12,
+                                            fontWeight: FontWeight.w500,
+                                          ),
+                                        ),
+                                        const SizedBox(height: 10),
+                                        ListView.builder(
+                                          itemCount:
+                                              gameProvider.selectedUsers.length,
+                                          physics:
+                                              const NeverScrollableScrollPhysics(),
+                                          shrinkWrap: true,
+                                          itemBuilder: (context, index) {
+                                            UserModel user = gameProvider
+                                                .selectedUsers[index];
+                                            return WhoDrankButton(
+                                              isSelected: gameProvider.whoDrinks
+                                                  .contains(user),
+                                              name: user.name,
+                                              onTap: () {
+                                                gameProvider.addToDrink(user);
+                                              },
+                                            );
 
-                                top3Drinkers2(gameProvider, context),
+                                            // return ListTile(
+                                            //   title: Text(
+                                            //       gameProvider.users[index].name),
+                                            //   subtitle: Text(gameProvider
+                                            //       .users[index].amountOfDrinksHad
+                                            //       .toString()),
+                                            // );
+                                          },
+                                        ),
+                                      ],
+                                    )),
                                 const SizedBox(height: 10),
 
                                 RoundedButtonWidget(
@@ -206,11 +239,18 @@ class CardHeader extends StatelessWidget {
   Widget build(BuildContext context) {
     return Row(
       children: [
-        const Text(
-          'Drinking Game',
-          style: TextStyle(
-            fontSize: 20,
-            fontWeight: FontWeight.bold,
+        Container(
+          padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 2),
+          decoration: BoxDecoration(
+            color: Colors.orangeAccent.withOpacity(0.2),
+            borderRadius: BorderRadius.circular(30),
+          ),
+          child: Text(
+            gameProvider.currentGame.name,
+            style: const TextStyle(
+              fontSize: 12,
+              fontWeight: FontWeight.w500,
+            ),
           ),
         ),
         const Spacer(),

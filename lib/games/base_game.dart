@@ -7,3 +7,16 @@ abstract class BaseGame {
 
   String getPrompt(List<UserModel> players);
 }
+
+class GameWithPrompt {
+  final String name;
+  final String type;
+  final String prompt;
+  final int numberOfPlayers;
+
+  GameWithPrompt(
+      {required this.name,
+      required this.type,
+      required this.prompt,
+      required this.numberOfPlayers});
+}

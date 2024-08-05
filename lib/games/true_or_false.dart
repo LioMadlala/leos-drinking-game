@@ -19,11 +19,16 @@ class TrueOrFalse implements BaseGame {
     'I am afraid of heights',
     'I have a hidden talent',
   ];
+  String? _cachedPrompt;
 
   @override
   String getPrompt(List<UserModel> players) {
+    if (_cachedPrompt != null) {
+      return _cachedPrompt!;
+    }
     final random = Random();
     final statement = _statements[random.nextInt(_statements.length)];
-    return '@${players[0].name} True or False: $statement';
+    _cachedPrompt = '@${players[0].name} True or False: $statement';
+    return _cachedPrompt!;
   }
 }

@@ -11,6 +11,7 @@ class GameProvider with ChangeNotifier {
   List<UserModel> _users = [];
   BaseGame _currentGame = EveryoneDrinks();
   List<UserModel> _selectedUsers = [];
+  List<UserModel> whoDrinks = [];
   String? _currentPrompt;
   bool isLoading = false;
   int countdown = 3;
@@ -35,6 +36,15 @@ class GameProvider with ChangeNotifier {
     notifyListeners();
   }
 
+  gameWithPrompt() {
+    return GameWithPrompt(
+      name: currentGame.name,
+      type: currentGame.type,
+      prompt: currentPrompt ?? '',
+      numberOfPlayers: currentGame.numberOfPlayers,
+    );
+  }
+
   isLoadingData() {
     isLoading = isLoading ? false : true;
     notifyListeners();
@@ -45,12 +55,12 @@ class GameProvider with ChangeNotifier {
     Timer.periodic(const Duration(seconds: 1), (timer) {
       if (countdown > 0) {
         countdown--;
+        notifyListeners();
       } else {
         timer.cancel();
         loadUsers();
         startNewRound();
       }
-      notifyListeners();
     });
   }
 
@@ -82,16 +92,31 @@ class GameProvider with ChangeNotifier {
     _selectedUsers =
         await _gameService.selectRandomUsers(_currentGame.numberOfPlayers);
     _currentPrompt = _currentGame.getPrompt(_selectedUsers);
+    whoDrinks.clear();
     isLoadingData();
+  }
+
+  addToDrink(UserModel user) {
+    if (whoDrinks.contains(user)) {
+      whoDrinks.remove(user);
+    } else {
+      whoDrinks.add(user);
+    }
+    checkWhoDrinks();
+    notifyListeners();
+  }
+
+  checkWhoDrinks() {
+    for (var user in whoDrinks) {
+      user.amountOfDrinksHad++;
+      _gameService.updateUser(user);
+    }
   }
 
   void completeTurn() {
     isLoadingData();
-    for (var user in _selectedUsers) {
-      user.amountOfDrinksHad++;
-      _gameService.updateUser(user);
-      startNewRound();
-    }
+    checkWhoDrinks();
+    startNewRound();
     isLoadingData();
   }
 }
