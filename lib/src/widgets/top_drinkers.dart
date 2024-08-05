@@ -1,9 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:leos_drinking_game/providers/game_provider.dart';
-import 'package:leos_drinking_game/src/choose_game/custom_button.dart';
-import 'package:leos_drinking_game/src/choose_game/players_modal.dart';
-import 'package:leos_drinking_game/src/choose_game/top_users.dart';
-import 'package:wolt_modal_sheet/wolt_modal_sheet.dart';
+import 'package:leos_drinking_game/src/widgets/top_users.dart';
 
 Column top3Drinkers(GameProvider gameProvider, BuildContext context) {
   return Column(

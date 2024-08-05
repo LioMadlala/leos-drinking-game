@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:leos_drinking_game/models/user_model.dart';
 import 'package:leos_drinking_game/providers/game_provider.dart';
-import 'package:leos_drinking_game/src/choose_game/custom_chip.dart';
-import 'package:leos_drinking_game/src/choose_game/top_drinkers.dart';
+import 'package:leos_drinking_game/src/widgets/custom_chip.dart';
+import 'package:leos_drinking_game/src/widgets/top_drinkers.dart';
 import 'package:provider/provider.dart';
 
 class AllPlayersList extends StatelessWidget {

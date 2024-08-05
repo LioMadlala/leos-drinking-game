@@ -2,17 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:flutter_animate/flutter_animate.dart';
 import 'package:leos_drinking_game/models/user_model.dart';
 import 'package:leos_drinking_game/providers/game_provider.dart';
-import 'package:leos_drinking_game/src/choose_game/add_player_alert.dart';
-import 'package:leos_drinking_game/src/choose_game/custom_button.dart';
-import 'package:leos_drinking_game/src/choose_game/custom_chip.dart';
-import 'package:leos_drinking_game/src/choose_game/custom_text.dart';
-import 'package:leos_drinking_game/src/choose_game/gradient_button.dart';
-import 'package:leos_drinking_game/src/choose_game/players_list.dart';
+import 'package:leos_drinking_game/src/widgets/add_player_alert.dart';
+import 'package:leos_drinking_game/src/widgets/custom_chip.dart';
+import 'package:leos_drinking_game/src/widgets/custom_text.dart';
+import 'package:leos_drinking_game/src/widgets/gradient_button.dart';
 import 'package:leos_drinking_game/src/choose_game/players_modal.dart';
-import 'package:leos_drinking_game/src/choose_game/selected_players.dart';
-import 'package:leos_drinking_game/src/choose_game/top_drinkers.dart';
-import 'package:leos_drinking_game/src/choose_game/top_drinkers2.dart';
-import 'package:leos_drinking_game/src/choose_game/top_users.dart';
 import 'package:leos_drinking_game/src/widgets/wh0_drank_button.dart';
 import 'package:provider/provider.dart';
 import 'package:wolt_modal_sheet/wolt_modal_sheet.dart';
@@ -149,9 +143,7 @@ class _GameScreenState extends State<GameScreen> {
                               //             .ms) // runs after the above w/new duration
                               // ,
                               const SizedBox(height: 8),
-                              // const Text(
-                              //     "Show Players that must drink, user than selects who drank before pressing next"),
-                              // top3Drinkers2(gameProvider, context),
+
                               Container(
                                   padding: const EdgeInsets.symmetric(
                                     // horizontal: 6,

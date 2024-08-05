@@ -27,6 +27,10 @@ class GameProvider with ChangeNotifier {
     return sortedUsers;
   }
 
+  addGames(List<BaseGame> games) {
+    _gameService.addGames(games);
+  }
+
   BaseGame get currentGame => _currentGame;
   List<UserModel> get selectedUsers => _selectedUsers;
   String? get currentPrompt => _currentPrompt;

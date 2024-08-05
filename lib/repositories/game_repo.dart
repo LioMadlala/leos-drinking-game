@@ -4,8 +4,8 @@ import 'package:leos_drinking_game/games/base_game.dart';
 import 'package:leos_drinking_game/games/everyone_drinks.dart';
 import 'package:leos_drinking_game/games/single_naughty_dare.dart';
 import 'package:leos_drinking_game/games/multi_naughty_dare.dart';
-import 'package:leos_drinking_game/games/random_naughty_question.dart';
-import 'package:leos_drinking_game/games/random_soft_question.dart';
+import 'package:leos_drinking_game/games/single_naughty_question.dart';
+import 'package:leos_drinking_game/games/single_soft_question.dart';
 import 'package:leos_drinking_game/games/true_or_false.dart';
 import 'package:leos_drinking_game/models/game_model.dart';
 import 'package:leos_drinking_game/models/user_model.dart';
@@ -41,18 +41,17 @@ class UserRepository {
   }
 }
 
-final List<BaseGame> _games = [
-  // EveryoneDrinks(),
-  // RandomNaughtyQuestion(),
-  // SingleNaughtyDare(),
-  // RandomSoftQuestion(),
-  TrueOrFalse(),
-  MultiNaughtyDare(),
-];
-
 class GameRepository {
+  List<BaseGame> games = [
+    // EveryoneDrinks(),
+    // RandomNaughtyQuestion(),
+    // SingleNaughtyDare(),
+    // RandomSoftQuestion(),
+    // TrueOrFalse(),
+    // MultiNaughtyDare(),
+  ];
   Future<List<GameModel>> getGames() async {
-    return _games
+    return games
         .map((game) => GameModel(
               id: game.type,
               name: game.name,
@@ -62,8 +61,15 @@ class GameRepository {
         .toList();
   }
 
+  Future<void> addGames(List<BaseGame> gamesList) async {
+    games = gamesList;
+  }
+
   Future<BaseGame> getRandomGame() async {
     final random = Random();
-    return _games[random.nextInt(_games.length)];
+    if (games.isEmpty) {
+      return EveryoneDrinks();
+    }
+    return games[random.nextInt(games.length)];
   }
 }

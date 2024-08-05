@@ -24,6 +24,7 @@ class TrueOrFalse implements BaseGame {
   String getPrompt(List<UserModel> players) {
     final random = Random();
     final statement = _statements[random.nextInt(_statements.length)];
-    return statement;
+
+    return '@Everyone $statement';
   }
 }

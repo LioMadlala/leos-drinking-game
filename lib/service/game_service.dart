@@ -10,6 +10,8 @@ class GameService {
 
   Future<List<UserModel>> getUsers() => _userRepository.getUsers();
   Future<void> addUser(UserModel user) => _userRepository.addUser(user);
+  Future<void> addGames(List<BaseGame> games) =>
+      _gameRepository.addGames(games);
   Future<void> updateUser(UserModel user) => _userRepository.updateUser(user);
   Future<BaseGame> getRandomGame() => _gameRepository.getRandomGame();
 

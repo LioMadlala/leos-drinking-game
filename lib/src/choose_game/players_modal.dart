@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:leos_drinking_game/src/choose_game/custom_button.dart';
-import 'package:leos_drinking_game/src/choose_game/players_list.dart';
+import 'package:leos_drinking_game/src/widgets/custom_button.dart';
+import 'package:leos_drinking_game/src/widgets/players_list.dart';
 import 'package:wolt_modal_sheet/wolt_modal_sheet.dart';
 
 SliverWoltModalSheetPage playersModal(

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:leos_drinking_game/providers/game_provider.dart';
-import 'package:leos_drinking_game/src/choose_game/custom_chip.dart';
+import 'package:leos_drinking_game/src/widgets/custom_chip.dart';
 
 class SelectedPlayers extends StatelessWidget {
   final GameProvider gameProvider;
