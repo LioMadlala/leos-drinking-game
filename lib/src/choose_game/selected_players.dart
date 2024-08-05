@@ -33,7 +33,6 @@ class SelectedPlayers extends StatelessWidget {
                 children: [
                   CustomChip(
                     text: user.name,
-                    bgColor: Colors.grey.shade100,
                     textColor: Colors.black,
                     textSize: 12,
                     height: 30,

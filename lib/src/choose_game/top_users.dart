@@ -11,13 +11,14 @@ class TopUsersShowcase extends StatelessWidget {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        const Text(
-          'Top drinkers',
-          style: TextStyle(
-            // fontWeight: FontWeight.bold,
-            fontSize: 12,
+        if (topUsers[0].amountOfDrinksHad > 0)
+          const Text(
+            'Top drinkers',
+            style: TextStyle(
+              // fontWeight: FontWeight.bold,
+              fontSize: 12,
+            ),
           ),
-        ),
         const SizedBox(height: 4),
         Column(
           // mainAxisAlignment: MainAxisAlignment.start,
@@ -55,7 +56,9 @@ class TopUsersShowcase extends StatelessWidget {
     return SingleChildScrollView(
       scrollDirection: Axis.horizontal,
       child: Container(
-          padding: const EdgeInsets.symmetric(vertical: 2.0),
+          padding: const EdgeInsets.symmetric(
+            vertical: 2.0,
+          ),
           child: Row(mainAxisSize: MainAxisSize.min, children: [
             CircleAvatar(
               radius: 10,
@@ -72,9 +75,8 @@ class TopUsersShowcase extends StatelessWidget {
             Padding(
               padding: const EdgeInsets.symmetric(vertical: 2.0),
               child: Container(
-                padding: const EdgeInsets.symmetric(
-                  horizontal: 16.0,
-                ),
+                padding:
+                    const EdgeInsets.symmetric(horizontal: 16.0, vertical: 4),
                 constraints: BoxConstraints(
                   maxWidth: MediaQuery.of(context).size.width,
                   minWidth: (80 - user.amountOfDrinksHad) +
@@ -82,16 +84,16 @@ class TopUsersShowcase extends StatelessWidget {
                 ),
                 decoration: BoxDecoration(
                   color: Colors.grey.shade100,
-                  border: Border.all(
-                    color: Colors.grey.shade300,
-                    width: 1,
-                  ),
+                  // border: Border.all(
+                  //   color: Colors.grey.shade300,
+                  //   width: 1,
+                  // ),
                   borderRadius: BorderRadius.circular(30),
                 ),
                 child: Row(
-                  crossAxisAlignment: CrossAxisAlignment.start,
+                  crossAxisAlignment: CrossAxisAlignment.center,
                   mainAxisSize: MainAxisSize.min,
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  // mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     Text(
                       user.name,
@@ -100,9 +102,10 @@ class TopUsersShowcase extends StatelessWidget {
                         fontSize: 12,
                       ),
                     ),
+                    const SizedBox(width: 10),
                     Text(
                       "${user.amountOfDrinksHad} drinks",
-                      style: const TextStyle(fontSize: 10, color: Colors.grey),
+                      style: const TextStyle(fontSize: 12, color: Colors.grey),
                     ),
                   ],
                 ),

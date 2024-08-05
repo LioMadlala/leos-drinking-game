@@ -36,193 +36,191 @@ class _GameScreenState extends State<GameScreen> {
   Widget build(BuildContext context) {
     return SafeArea(
       child: Scaffold(
-        backgroundColor: Colors.grey[100],
+        // backgroundColor: Colors.grey[100],
         body: Container(
+          height: double.infinity,
           decoration: const BoxDecoration(
             gradient: LinearGradient(
               begin: Alignment.topCenter,
-              end: Alignment.bottomCenter,
+              end: Alignment.bottomRight,
               colors: [
                 Color(0xFFfbe9d7),
                 Color(0xFFf6d5f7),
               ],
             ),
           ),
-          child: Center(
-            child: OrientationBuilder(
-              builder: (context, orientation) {
-                return Consumer<GameProvider>(
-                    builder: (context, gameProvider, child) {
-                  if (gameProvider.countdown > 0) {
-                    return Center(
-                        child: Text(gameProvider.countdown.toString()));
-                  }
+          child: OrientationBuilder(
+            builder: (context, orientation) {
+              return Consumer<GameProvider>(
+                  builder: (context, gameProvider, child) {
+                if (gameProvider.countdown > 0) {
+                  return Center(child: Text(gameProvider.countdown.toString()));
+                }
 
-                  if (gameProvider.isLoading) {
-                    return const Center(child: CircularProgressIndicator());
-                  }
-                  return SingleChildScrollView(
-                    physics: const BouncingScrollPhysics(),
-                    child: Padding(
-                      padding: const EdgeInsets.all(16.0),
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          const SizedBox(height: 10),
-                          const Text(
-                            'Leos Drinking Game',
-                            style: TextStyle(
-                              fontSize: 16,
-                              fontWeight: FontWeight.w500,
-                            ),
+                if (gameProvider.isLoading) {
+                  return const Center(child: CircularProgressIndicator());
+                }
+                return SingleChildScrollView(
+                  physics: const BouncingScrollPhysics(),
+                  child: Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 16.0),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        // const SizedBox(height: 0),
+
+                        //Game logo
+                        Center(
+                          child: Image.asset(
+                            'assets/logo/game_logo.png',
+                            height: 150,
                           ),
-                          const SizedBox(height: 20),
-                          Container(
-                            padding: const EdgeInsets.all(16),
-                            decoration: BoxDecoration(
-                              color: Colors.white,
-                              borderRadius: BorderRadius.circular(20),
-                              boxShadow: [
-                                BoxShadow(
-                                  color: Colors.grey.withOpacity(0.3),
-                                  spreadRadius: 2,
-                                  blurRadius: 7,
-                                  offset: const Offset(0, 3),
-                                ),
-                              ],
-                            ),
-                            child: Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                CardHeader(
-                                  gameProvider: gameProvider,
-                                ),
-                                const SizedBox(height: 20),
+                        ),
+                        const SizedBox(height: 10),
+                        Container(
+                          padding: const EdgeInsets.all(16),
+                          decoration: BoxDecoration(
+                            color: Colors.white,
+                            borderRadius: BorderRadius.circular(20),
+                            boxShadow: [
+                              BoxShadow(
+                                color: Colors.grey.withOpacity(0.3),
+                                spreadRadius: 2,
+                                blurRadius: 7,
+                                offset: const Offset(0, 3),
+                              ),
+                            ],
+                          ),
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              CardHeader(
+                                gameProvider: gameProvider,
+                              ),
+                              const SizedBox(height: 20),
 
-                                Container(
-                                  padding: const EdgeInsets.symmetric(
-                                      horizontal: 8, vertical: 80),
-                                  decoration: BoxDecoration(
-                                    color: Colors.blue[50],
-                                    gradient: const LinearGradient(
-                                      begin: Alignment.topCenter,
-                                      end: Alignment.bottomCenter,
-                                      colors: [
-                                        Color(0xFFfbe9d7),
-                                        Color(0xFFf6d5f7),
-                                      ],
-                                    ),
-                                    borderRadius: BorderRadius.circular(10),
-                                  ),
-                                  child: Center(
-                                    child: CustomTextWidget(
-                                      inputText: (gameProvider
-                                          .gameWithPrompt()
-                                          .prompt),
-                                    ),
-                                  ),
-                                  // child: Center(
-                                  //   child: Text(
-                                  // (gameProvider.currentGame.getPrompt(
-                                  //     gameProvider.selectedUsers)),
-                                  //     textAlign: TextAlign.center,
-                                  //     style: const TextStyle(
-                                  //       fontSize: 18,
-                                  //       fontWeight: FontWeight.bold,
-                                  //     ),
-                                  //   ),
-                                  // ),
-                                ),
-                                // Animate(
-                                //   effects: const [
-                                //     FadeEffect(),
-                                //     ScaleEffect(),
-                                //   ],
-                                //   child: const Text("Hello World!"),
-                                // ),
-                                // const Text("Hello World!")
-                                //     .animate()
-                                //     .fadeIn() // uses `Animate.defaultDuration`
-                                //     .scale() // inherits duration from fadeIn
-                                //     .move(
-                                //         delay: 300.ms,
-                                //         duration: 600
-                                //             .ms) // runs after the above w/new duration
-                                // ,
-                                const SizedBox(height: 8),
-                                // const Text(
-                                //     "Show Players that must drink, user than selects who drank before pressing next"),
-                                // top3Drinkers2(gameProvider, context),
-                                Container(
-                                    padding: const EdgeInsets.symmetric(
-                                      // horizontal: 6,
-                                      vertical: 6,
-                                    ),
-                                    child: Column(
-                                      crossAxisAlignment:
-                                          CrossAxisAlignment.start,
-                                      children: [
-                                        const Text(
-                                          "Who drank? 🤭",
-                                          style: TextStyle(
-                                            fontSize: 12,
-                                            fontWeight: FontWeight.w500,
-                                          ),
-                                        ),
-                                        const SizedBox(height: 10),
-                                        ListView.builder(
-                                          itemCount:
-                                              gameProvider.selectedUsers.length,
-                                          physics:
-                                              const NeverScrollableScrollPhysics(),
-                                          shrinkWrap: true,
-                                          itemBuilder: (context, index) {
-                                            UserModel user = gameProvider
-                                                .selectedUsers[index];
-                                            return WhoDrankButton(
-                                              isSelected: gameProvider.whoDrinks
-                                                  .contains(user),
-                                              name: user.name,
-                                              onTap: () {
-                                                gameProvider.addToDrink(user);
-                                              },
-                                            );
-
-                                            // return ListTile(
-                                            //   title: Text(
-                                            //       gameProvider.users[index].name),
-                                            //   subtitle: Text(gameProvider
-                                            //       .users[index].amountOfDrinksHad
-                                            //       .toString()),
-                                            // );
-                                          },
-                                        ),
-                                      ],
-                                    )),
-                                const SizedBox(height: 10),
-
-                                RoundedButtonWidget(
-                                    buttonText: "Next Round",
-                                    colors: const [
-                                      Color(0xFF57ebde),
-                                      Color(0xFFaefb2a),
+                              Container(
+                                padding: const EdgeInsets.symmetric(
+                                    horizontal: 8, vertical: 80),
+                                decoration: BoxDecoration(
+                                  color: Colors.blue[50],
+                                  gradient: const LinearGradient(
+                                    begin: Alignment.topCenter,
+                                    end: Alignment.bottomCenter,
+                                    colors: [
+                                      Color(0xFFfbe9d7),
+                                      Color(0xFFf6d5f7),
                                     ],
-                                    onPressed: () async {
-                                      if (!gameProvider.isLoading) {
-                                        gameProvider.completeTurn();
-                                      }
-                                    }),
-                                const SizedBox(height: 10),
-                              ],
-                            ),
+                                  ),
+                                  borderRadius: BorderRadius.circular(10),
+                                ),
+                                child: Center(
+                                  child: CustomTextWidget(
+                                    inputText:
+                                        (gameProvider.gameWithPrompt().prompt),
+                                  ),
+                                ),
+                                // child: Center(
+                                //   child: Text(
+                                // (gameProvider.currentGame.getPrompt(
+                                //     gameProvider.selectedUsers)),
+                                //     textAlign: TextAlign.center,
+                                //     style: const TextStyle(
+                                //       fontSize: 18,
+                                //       fontWeight: FontWeight.bold,
+                                //     ),
+                                //   ),
+                                // ),
+                              ),
+                              // Animate(
+                              //   effects: const [
+                              //     FadeEffect(),
+                              //     ScaleEffect(),
+                              //   ],
+                              //   child: const Text("Hello World!"),
+                              // ),
+                              // const Text("Hello World!")
+                              //     .animate()
+                              //     .fadeIn() // uses `Animate.defaultDuration`
+                              //     .scale() // inherits duration from fadeIn
+                              //     .move(
+                              //         delay: 300.ms,
+                              //         duration: 600
+                              //             .ms) // runs after the above w/new duration
+                              // ,
+                              const SizedBox(height: 8),
+                              // const Text(
+                              //     "Show Players that must drink, user than selects who drank before pressing next"),
+                              // top3Drinkers2(gameProvider, context),
+                              Container(
+                                  padding: const EdgeInsets.symmetric(
+                                    // horizontal: 6,
+                                    vertical: 6,
+                                  ),
+                                  child: Column(
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.start,
+                                    children: [
+                                      const Text(
+                                        "Who drank? 🤭",
+                                        style: TextStyle(
+                                          fontSize: 12,
+                                          fontWeight: FontWeight.w500,
+                                        ),
+                                      ),
+                                      const SizedBox(height: 10),
+                                      ListView.builder(
+                                        itemCount:
+                                            gameProvider.selectedUsers.length,
+                                        physics:
+                                            const NeverScrollableScrollPhysics(),
+                                        shrinkWrap: true,
+                                        itemBuilder: (context, index) {
+                                          UserModel user =
+                                              gameProvider.selectedUsers[index];
+                                          return WhoDrankButton(
+                                            isSelected: gameProvider.whoDrinks
+                                                .contains(user),
+                                            name: user.name,
+                                            onTap: () {
+                                              gameProvider.addToDrink(user);
+                                            },
+                                          );
+
+                                          // return ListTile(
+                                          //   title: Text(
+                                          //       gameProvider.users[index].name),
+                                          //   subtitle: Text(gameProvider
+                                          //       .users[index].amountOfDrinksHad
+                                          //       .toString()),
+                                          // );
+                                        },
+                                      ),
+                                    ],
+                                  )),
+                              const SizedBox(height: 10),
+
+                              RoundedButtonWidget(
+                                  buttonText: "Next Round",
+                                  colors: const [
+                                    Color(0xFF57ebde),
+                                    Color(0xFFaefb2a),
+                                  ],
+                                  onPressed: () async {
+                                    if (!gameProvider.isLoading) {
+                                      gameProvider.completeTurn();
+                                    }
+                                  }),
+                              const SizedBox(height: 10),
+                            ],
                           ),
-                        ],
-                      ),
+                        ),
+                      ],
                     ),
-                  );
-                });
-              },
-            ),
+                  ),
+                );
+              });
+            },
           ),
         ),
       ),
@@ -239,23 +237,56 @@ class CardHeader extends StatelessWidget {
   Widget build(BuildContext context) {
     return Row(
       children: [
-        Container(
-          padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 2),
-          decoration: BoxDecoration(
-            color: Colors.orangeAccent.withOpacity(0.2),
-            borderRadius: BorderRadius.circular(30),
-          ),
+        Expanded(
+          flex: 4,
           child: Text(
             gameProvider.currentGame.name,
-            style: const TextStyle(
-              fontSize: 12,
-              fontWeight: FontWeight.w500,
-            ),
+            overflow: TextOverflow.ellipsis,
+            style: const TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
           ),
         ),
+        // Container(
+        //   padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 2),
+        //   decoration: BoxDecoration(
+        //     color: Colors.orangeAccent.withOpacity(0.2),
+        //     borderRadius: BorderRadius.circular(30),
+        //   ),
+        //   child: Text(
+        //     gameProvider.currentGame.name,
+        //     style: const TextStyle(
+        //       fontSize: 12,
+        //       fontWeight: FontWeight.w500,
+        //     ),
+        //   ),
+        // ),
         const Spacer(),
         CustomChip(
-          text: 'Player',
+          text: 'View Players',
+          onTap: () async {
+            // await gameProvider.addUser("Leo", "Male");
+
+            WoltModalSheet.show<void>(
+              context: context,
+              pageListBuilder: (modalSheetContext) {
+                final textTheme = Theme.of(context).textTheme;
+                return [
+                  playersModal(modalSheetContext, textTheme),
+                ];
+              },
+              modalTypeBuilder: (context) {
+                return const WoltBottomSheetType();
+              },
+              onModalDismissedWithBarrierTap: () {
+                debugPrint('Closed modal sheet with barrier tap');
+                Navigator.of(context).pop();
+              },
+            );
+          },
+          isBold: false,
+        ),
+        const SizedBox(width: 4),
+        CustomChip(
+          text: 'Add Player',
           onTap: () async {
             // await gameProvider.addUser("Leo", "Male");
 
@@ -276,11 +307,11 @@ class CardHeader extends StatelessWidget {
               },
             );
           },
-          isBold: true,
+          isBold: false,
           widget: const Icon(
             Icons.add,
-            size: 15,
-            color: Colors.white,
+            size: 12,
+            color: Colors.black,
           ),
         ),
       ],

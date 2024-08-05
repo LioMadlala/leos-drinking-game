@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 
 class CustomChip extends StatelessWidget {
   final String text;
-  final Color? bgColor;
+  final List<Color>? bgColor;
   final Color? textColor;
   final double? textSize;
   final Function()? onTap;
@@ -29,7 +29,14 @@ class CustomChip extends StatelessWidget {
         padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 5),
         height: height,
         decoration: BoxDecoration(
-          color: bgColor ?? Colors.purpleAccent,
+          gradient: (bgColor != null)
+              ? LinearGradient(
+                  colors: bgColor!,
+                )
+              : LinearGradient(colors: [
+                  const Color(0xFFf6d5f7).withOpacity(0.5),
+                  const Color(0xFFfbe9d7).withOpacity(0.5),
+                ]),
           borderRadius: BorderRadius.circular(30),
         ),
         child: Center(
@@ -40,7 +47,7 @@ class CustomChip extends StatelessWidget {
                 text,
                 style: TextStyle(
                   fontSize: textSize ?? 10,
-                  color: textColor ?? Colors.white,
+                  color: textColor ?? Colors.black,
                   fontWeight: isBold ? FontWeight.bold : FontWeight.normal,
                 ),
               ),

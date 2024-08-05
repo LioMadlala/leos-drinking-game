@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:leos_drinking_game/providers/game_provider.dart';
 
 Widget customButton({
-  required GameProvider gameProvider,
   required String text,
   Function()? onPressed,
   required Color bgColor,

@@ -7,6 +7,7 @@ import 'package:wolt_modal_sheet/wolt_modal_sheet.dart';
 
 Column top3Drinkers(GameProvider gameProvider, BuildContext context) {
   return Column(
+    crossAxisAlignment: CrossAxisAlignment.start,
     children: [
       if (gameProvider.users.isNotEmpty)
         TopUsersShowcase(
@@ -18,32 +19,6 @@ Column top3Drinkers(GameProvider gameProvider, BuildContext context) {
         ),
       Container(),
       const SizedBox(height: 10),
-      customButton(
-        gameProvider: gameProvider,
-        text: 'View Players',
-        onPressed: () async {
-          WoltModalSheet.show<void>(
-            context: context,
-            pageListBuilder: (modalSheetContext) {
-              final textTheme = Theme.of(context).textTheme;
-              return [
-                playersModal(modalSheetContext, textTheme),
-              ];
-            },
-            modalTypeBuilder: (context) {
-              return const WoltBottomSheetType();
-            },
-            onModalDismissedWithBarrierTap: () {
-              debugPrint('Closed modal sheet with barrier tap');
-              Navigator.of(context).pop();
-            },
-          );
-        },
-        bgColor: const Color.fromARGB(255, 227, 241, 234),
-        textColor: Colors.black,
-        textSize: 12,
-        height: 50,
-      ),
     ],
   );
 }

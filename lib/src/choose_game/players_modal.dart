@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:leos_drinking_game/src/choose_game/custom_button.dart';
 import 'package:leos_drinking_game/src/choose_game/players_list.dart';
 import 'package:wolt_modal_sheet/wolt_modal_sheet.dart';
 
@@ -14,44 +15,13 @@ SliverWoltModalSheetPage playersModal(
       padding: const EdgeInsets.all(16),
       child: Column(
         children: [
-          ElevatedButton(
+          customButton(
+            text: 'Close',
             onPressed: Navigator.of(modalSheetContext).pop,
-            style: ElevatedButton.styleFrom(
-              backgroundColor: Colors.purpleAccent,
-              shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(10),
-              ),
-            ),
-            child: const SizedBox(
-              height: 50,
-              width: double.infinity,
-              child: Center(
-                child: Text(
-                  'Add Player',
-                  style: TextStyle(fontSize: 14, color: Colors.white),
-                ),
-              ),
-            ),
-          ),
-          const SizedBox(height: 8),
-          ElevatedButton(
-            onPressed: Navigator.of(modalSheetContext).pop,
-            style: ElevatedButton.styleFrom(
-              backgroundColor: Colors.pinkAccent,
-              shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(10),
-              ),
-            ),
-            child: const SizedBox(
-              height: 50,
-              width: double.infinity,
-              child: Center(
-                child: Text(
-                  'Close',
-                  style: TextStyle(fontSize: 14, color: Colors.white),
-                ),
-              ),
-            ),
+            bgColor: const Color.fromARGB(255, 227, 241, 234),
+            textColor: Colors.black,
+            textSize: 12,
+            height: 50,
           ),
         ],
       ),
