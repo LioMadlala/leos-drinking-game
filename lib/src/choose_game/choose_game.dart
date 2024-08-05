@@ -133,7 +133,7 @@ class _ChooseGameState extends State<ChooseGame> {
                   ),
                   const SizedBox(height: 20),
                   SizedBox(
-                    height: 250,
+                    height: 300,
                     // width: 100,
                     child: InfiniteCarousel.builder(
                       itemCount: gameModes.length,
