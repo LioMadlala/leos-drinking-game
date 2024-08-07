@@ -1,7 +1,6 @@
-import 'package:expandable/expandable.dart';
 import 'package:flutter/material.dart';
 import 'package:leos_drinking_game/providers/game_provider.dart';
-import 'package:leos_drinking_game/src/widgets/add_player_alert.dart';
+import 'package:leos_drinking_game/src/widgets/emojiGrid.dart';
 import 'package:provider/provider.dart';
 
 class AddNewUser extends StatefulWidget {
@@ -13,7 +12,6 @@ class AddNewUser extends StatefulWidget {
 
 class _AddNewUserState extends State<AddNewUser> {
   TextEditingController controller = TextEditingController();
-  ExpandableController expandableController = ExpandableController();
 
   @override
   Widget build(BuildContext context) {

@@ -4,15 +4,12 @@ import 'package:flutter_animate/flutter_animate.dart';
 import 'package:leos_drinking_game/models/user_model.dart';
 import 'package:leos_drinking_game/providers/game_provider.dart';
 import 'package:leos_drinking_game/src/screens/players_screen/players_screen.dart';
-import 'package:leos_drinking_game/src/widgets/add_player_alert.dart';
 import 'package:leos_drinking_game/src/widgets/custom_chip.dart';
 import 'package:leos_drinking_game/src/widgets/custom_text.dart';
 import 'package:leos_drinking_game/src/widgets/gradient_button.dart';
-import 'package:leos_drinking_game/src/screens/choose_game/players_modal.dart';
 import 'package:leos_drinking_game/src/widgets/players_list.dart';
 import 'package:leos_drinking_game/src/widgets/wh0_drank_button.dart';
 import 'package:provider/provider.dart';
-import 'package:wolt_modal_sheet/wolt_modal_sheet.dart';
 
 class GameScreen extends StatefulWidget {
   const GameScreen({super.key});
