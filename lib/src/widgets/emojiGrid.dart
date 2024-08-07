@@ -40,7 +40,7 @@ class _ImojiGridState extends State<ImojiGrid> {
     });
   }
 
-  selectTheFirst(GameProvider gameProvider) {
+  selectTheFirstEmoji(GameProvider gameProvider) {
     gameProvider.newUserImoji == imageList[0];
     updateSelection(0);
   }
@@ -48,17 +48,18 @@ class _ImojiGridState extends State<ImojiGrid> {
   @override
   void initState() {
     initData();
-    // _initImages();
-    // await selectTheFirst(widget.gameProvider);
+
     super.initState();
   }
 
   initData() async {
     await _initImages();
-    await selectTheFirst(widget.gameProvider);
+    await selectTheFirstEmoji(widget.gameProvider);
+    widget.gameProvider.updateNewUserGender(0);
   }
 
-  List<bool> selection = [true, false];
+  List<bool> selection = [true, false, false];
+  String selectedGender = 'Male';
 
   @override
   Widget build(BuildContext context) {
@@ -74,6 +75,8 @@ class _ImojiGridState extends State<ImojiGrid> {
           textStyle: const TextStyle(fontSize: 12),
           onPressed: (index) {
             // handle button press
+            widget.gameProvider.updateNewUserGender(index);
+
             setState(() {
               for (int buttonIndex = 0;
                   buttonIndex < selection.length;
@@ -107,6 +110,12 @@ class _ImojiGridState extends State<ImojiGrid> {
                 ),
                 Text("Female")
               ],
+            ),
+            Padding(
+              padding: EdgeInsets.all(8.0),
+              child: Row(
+                children: [Text("I identify as 🌈")],
+              ),
             ),
           ],
         ),

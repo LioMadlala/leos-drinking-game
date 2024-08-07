@@ -137,7 +137,11 @@ class UserCard extends StatelessWidget {
                     user.gender,
                     style: TextStyle(
                       fontSize: 10,
-                      color: user.gender == 'Male' ? Colors.cyan : Colors.pink,
+                      color: user.gender == 'Male'
+                          ? Colors.cyan
+                          : user.gender == 'Female'
+                              ? Colors.pink
+                              : Colors.amber,
                     ),
                   ),
                 ],

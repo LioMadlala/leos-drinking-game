@@ -5,6 +5,7 @@ import 'package:leos_drinking_game/games/base_game.dart';
 import 'package:leos_drinking_game/games/everyone_drinks.dart';
 import 'package:leos_drinking_game/games/multi_truth_or_drink.dart';
 import 'package:leos_drinking_game/models/user_model.dart';
+import 'package:leos_drinking_game/service/extentions.dart';
 import 'package:leos_drinking_game/service/game_service.dart';
 
 class GameProvider with ChangeNotifier {
@@ -89,16 +90,23 @@ class GameProvider with ChangeNotifier {
 
     final newUser = UserModel(
       id: DateTime.now().toString(),
-      name: name,
-      gender: newUserGenger,
+      name: name.capitalized,
+      gender: newUserGenger.capitalized,
       imoji: newUserImoji,
     );
     await _gameService.addUser(newUser);
     isLoadingData();
   }
 
-  updateNewUserGender(String gender) {
-    newUserGenger = gender;
+  updateNewUserGender(int index) {
+    if (index == 0) {
+      newUserGenger = 'Male';
+    } else if (index == 1) {
+      newUserGenger = "Female";
+    } else {
+      newUserGenger = "I identify as a 🌈";
+    }
+
     notifyListeners();
   }
 

@@ -426,7 +426,10 @@ class CardHeader extends StatelessWidget {
         CustomChip(
           text: 'View Players',
           onTap: () async {
-            Navigator.of(context).pushNamed(PlayersScreen.routeName);
+            await Navigator.of(context).pushNamed(
+              PlayersScreen.routeName,
+              arguments: {'isStartGame': false},
+            );
           },
           isBold: false,
         ),
