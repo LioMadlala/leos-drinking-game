@@ -54,6 +54,17 @@ class GameProvider with ChangeNotifier {
     );
   }
 
+  selectedUsersForGames() async {
+    if (currentGame is MultiTruthOrDrink) {
+      // _selectedUsers = _users;
+      _selectedUsers = await _gameService.selectRandomUsers(_users.length);
+    } else {
+      _selectedUsers =
+          await _gameService.selectRandomUsers(_currentGame.numberOfPlayers);
+    }
+    notifyListeners();
+  }
+
   isLoadingData() {
     isLoading = isLoading ? false : true;
     notifyListeners();

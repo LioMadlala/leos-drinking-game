@@ -4,12 +4,14 @@ class RoundedButtonWidget extends StatelessWidget {
   final String buttonText;
   final Function()? onPressed;
   final List<Color> colors;
+  final bool isBold;
 
   const RoundedButtonWidget({
     super.key,
     required this.buttonText,
     this.onPressed,
     required this.colors,
+    this.isBold = false,
   });
 
   @override
@@ -47,9 +49,9 @@ class RoundedButtonWidget extends StatelessWidget {
           ),
           child: Text(
             buttonText,
-            style: const TextStyle(
-              fontSize: 12,
-              // fontWeight: FontWeight.w700,
+            style: TextStyle(
+              fontSize: 14,
+              fontWeight: isBold ? FontWeight.w700 : FontWeight.normal,
               color: Colors.black,
             ),
           ),

@@ -8,8 +8,8 @@ import 'package:leos_drinking_game/games/single_player_truth_or_drink.dart';
 import 'package:leos_drinking_game/games/multi_truth_or_drink.dart';
 import 'package:leos_drinking_game/models/select_game_mode.dart';
 import 'package:leos_drinking_game/providers/game_provider.dart';
-import 'package:leos_drinking_game/src/add_player/add_player.dart';
-import 'package:leos_drinking_game/src/choose_game/game_screen.dart';
+import 'package:leos_drinking_game/src/screens/choose_game/game_screen.dart';
+import 'package:leos_drinking_game/src/screens/players_screen/players_screen.dart';
 import 'package:provider/provider.dart';
 
 class ChooseGame extends StatefulWidget {
@@ -68,21 +68,21 @@ class _ChooseGameState extends State<ChooseGame> {
       ],
     ),
     GameMode(
-      name: "Naughty Naughty Questions",
+      name: "Naughty Truth or Drink",
       description: "description",
       games: [
         NaughtyAnswerOrDrink(),
       ],
     ),
     GameMode(
-      name: "Soft True or False",
+      name: "Truth or Drink",
       description: "description",
       games: [
         MultiTruthOrDrink(),
       ],
     ),
     GameMode(
-      name: "Naughty True or False",
+      name: "Multi Truth or Drink",
       description: "description",
       games: [
         MultiTruthOrDrink(),
@@ -151,12 +151,19 @@ class _ChooseGameState extends State<ChooseGame> {
                       itemBuilder: (context, itemIndex, realIndex) {
                         GameMode currentGameMode = gameModes[itemIndex];
                         return InkWell(
-                          onTap: () {
+                          onTap: () async {
+                            gameProvider.addGames(currentGameMode.games);
+                            await Navigator.of(context).pushNamed(
+                              PlayersScreen.routeName,
+                              arguments: {'isStartGame': true},
+                            );
+
                             if (gameProvider.users.length < 2) {
-                              Navigator.of(context)
-                                  .pushNamed(AddPlayer.routeName);
+                              await Navigator.of(context).pushNamed(
+                                PlayersScreen.routeName,
+                                arguments: {'isStartGame': true},
+                              );
                             } else {
-                              gameProvider.addGames(currentGameMode.games);
                               Navigator.of(context)
                                   .pushNamed(GameScreen.routeName);
                             }

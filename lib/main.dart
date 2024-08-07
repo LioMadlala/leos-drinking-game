@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:leos_drinking_game/providers/game_provider.dart';
 import 'package:leos_drinking_game/repositories/game_repo.dart';
+import 'package:leos_drinking_game/repositories/user_repo.dart';
 import 'package:leos_drinking_game/service/game_service.dart';
 import 'package:provider/provider.dart';
 

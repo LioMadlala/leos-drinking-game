@@ -1,6 +1,7 @@
 import 'package:leos_drinking_game/games/base_game.dart';
 import 'package:leos_drinking_game/models/user_model.dart';
 import 'package:leos_drinking_game/repositories/game_repo.dart';
+import 'package:leos_drinking_game/repositories/user_repo.dart';
 
 class GameService {
   final UserRepository _userRepository;

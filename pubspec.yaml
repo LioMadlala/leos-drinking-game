@@ -16,9 +16,8 @@ dependencies:
     sdk: flutter
   provider: ^6.1.2
   infinite_carousel: ^1.1.1
-  wolt_modal_sheet: ^0.7.1
   flutter_animate: ^4.5.0
-  expandable: ^5.0.1
+  circular_countdown_timer: ^0.2.4
 
 dev_dependencies:
   flutter_test:

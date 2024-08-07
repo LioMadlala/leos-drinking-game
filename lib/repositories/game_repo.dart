@@ -4,31 +4,10 @@ import 'package:leos_drinking_game/games/base_game.dart';
 import 'package:leos_drinking_game/games/everyone_drinks.dart';
 
 import 'package:leos_drinking_game/models/game_model.dart';
-import 'package:leos_drinking_game/models/user_model.dart';
-
-class UserRepository {
-  final List<UserModel> _users = [];
-
-  Future<List<UserModel>> getUsers() async {
-    List<UserModel> users = _users;
-
-    return users;
-  }
-
-  Future<void> addUser(UserModel user) async {
-    _users.add(user);
-  }
-
-  Future<void> updateUser(UserModel user) async {
-    final index = _users.indexWhere((u) => u.id == user.id);
-    if (index != -1) {
-      _users[index] = user;
-    }
-  }
-}
+import 'package:leos_drinking_game/repositories/user_repo.dart';
 
 class GameRepository {
-  var users = UserRepository()._users;
+  var users = UserRepository().users;
 
   List<BaseGame> games = [
     // EveryoneDrinks(),

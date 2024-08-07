@@ -1,12 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:leos_drinking_game/models/user_model.dart';
 import 'package:leos_drinking_game/providers/game_provider.dart';
+import 'package:leos_drinking_game/src/screens/choose_game/game_screen.dart';
 import 'package:leos_drinking_game/src/widgets/custom_chip.dart';
-import 'package:leos_drinking_game/src/widgets/top_drinkers.dart';
+import 'package:leos_drinking_game/src/widgets/gradient_button.dart';
 import 'package:provider/provider.dart';
 
 class AllPlayersList extends StatelessWidget {
   final int? showTop;
+  final bool isStartGame = true;
 
   const AllPlayersList({super.key, this.showTop});
 
@@ -19,50 +21,60 @@ class AllPlayersList extends StatelessWidget {
   Widget build(BuildContext context) {
     final gameProvider = Provider.of<GameProvider>(context);
     final users = gameProvider.users;
-
-    if (users.isEmpty) {
-      return Center(
-        child: Column(
-          children: [
-            Image.asset(
-              'assets/ios-images/Person=Ed, Skin Tone=White, Posture=24 Fisting.png',
-              scale: 2,
-            ),
-            const Text(
-              "Let's add some Drinkers!",
-              style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
-            ),
-          ],
-        ),
-      );
-    }
-    // ignore: prefer_is_empty
-    if (users.length == 1) {
-      return Center(
-        child: Column(
-          children: [
-            usersListview(users),
-            Image.asset(
-              'assets/ios-images/Person=Ed, Skin Tone=White, Posture=17 Happy Winking.png',
-              scale: 2,
-            ),
-            const Text(
-              "Let's add one more Drinker!",
-              style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
-            ),
-          ],
-        ),
-      );
-    }
-    return usersListview(users);
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        usersListView(users),
+        if (isStartGame && users.length > 1)
+          Column(
+            children: [
+              const SizedBox(height: 10),
+              RoundedButtonWidget(
+                buttonText: "Lets Drink!",
+                colors: const [
+                  Color.fromARGB(255, 208, 255, 251),
+                  Color.fromARGB(255, 147, 224, 255),
+                ],
+                onPressed: () async {
+                  // Navigator.of(context).pushNamed(GameScreen.routeName);
+                  Navigator.of(context).pop();
+                },
+              ),
+            ],
+          ),
+      ],
+    );
   }
 
-  Column usersListview(List<UserModel> users) {
+  Column usersListView(List<UserModel> users) {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       mainAxisAlignment: MainAxisAlignment.start,
       children: [
         // top3Drinkers(gameProvider, context),
+        if (users.isNotEmpty)
+          const Row(
+            children: [
+              Text(
+                "Players",
+                style: TextStyle(
+                  fontSize: 12,
+                  // fontWeight: FontWeight.bold,
+                  color: Colors.black,
+                ),
+              ),
+              Spacer(),
+              Text(
+                "Top Drinkers First",
+                style: TextStyle(
+                  fontSize: 12,
+                  // fontWeight: FontWeight.bold,
+                  color: Colors.grey,
+                ),
+              ),
+            ],
+          ),
+        const SizedBox(height: 4),
         ListView.builder(
           shrinkWrap: true,
           physics: const NeverScrollableScrollPhysics(),
