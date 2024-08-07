@@ -16,9 +16,9 @@ class GameProvider with ChangeNotifier {
   List<UserModel> whoDrinks = [];
   String? _currentPrompt;
   bool isLoading = false;
-  int countdown = 3;
+  int countdown = 6;
   String newUserGenger = "Male";
-  String newUserImoji = "😆";
+  String newUserImoji = "";
 
   GameProvider(this._gameService);
 

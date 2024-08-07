@@ -5,6 +5,7 @@ class RoundedButtonWidget extends StatelessWidget {
   final Function()? onPressed;
   final List<Color> colors;
   final bool isBold;
+  final Color? textColor;
 
   const RoundedButtonWidget({
     super.key,
@@ -12,6 +13,7 @@ class RoundedButtonWidget extends StatelessWidget {
     this.onPressed,
     required this.colors,
     this.isBold = false,
+    this.textColor,
   });
 
   @override
@@ -40,6 +42,9 @@ class RoundedButtonWidget extends StatelessWidget {
               double.infinity,
               50,
             ),
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(10),
+            ),
             shadowColor: Colors.transparent),
         onPressed: onPressed,
         child: Padding(
@@ -52,7 +57,7 @@ class RoundedButtonWidget extends StatelessWidget {
             style: TextStyle(
               fontSize: 14,
               fontWeight: isBold ? FontWeight.w700 : FontWeight.normal,
-              color: Colors.black,
+              color: textColor ?? Colors.black,
             ),
           ),
         ),

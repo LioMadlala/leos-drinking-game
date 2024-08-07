@@ -1,3 +1,5 @@
+import 'package:circular_countdown_timer/circular_countdown_timer.dart';
+import 'package:circular_countdown_timer/countdown_text_format.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_animate/flutter_animate.dart';
@@ -26,6 +28,8 @@ class _GameScreenState extends State<GameScreen> {
     super.initState();
   }
 
+  final CountDownController _controller = CountDownController();
+
   @override
   Widget build(BuildContext context) {
     double width = MediaQuery.of(context).size.width;
@@ -49,7 +53,88 @@ class _GameScreenState extends State<GameScreen> {
               return Consumer<GameProvider>(
                   builder: (context, gameProvider, child) {
                 if (gameProvider.countdown > 0) {
-                  return Center(child: Text(gameProvider.countdown.toString()));
+                  return Center(
+                    child: CircularCountDownTimer(
+                      // Countdown duration in Seconds.
+                      duration: 3,
+
+                      // Countdown initial elapsed Duration in Seconds.
+                      initialDuration: 0,
+
+                      // Controls (i.e Start, Pause, Resume, Restart) the Countdown Timer.
+                      controller: _controller,
+
+                      // Width of the Countdown Widget.
+                      width: MediaQuery.of(context).size.width / 2,
+
+                      // Height of the Countdown Widget.
+                      height: MediaQuery.of(context).size.height / 2,
+
+                      // Ring Color for Countdown Widget.
+                      ringColor: Colors.grey[300]!,
+
+                      // Ring Gradient for Countdown Widget.
+                      ringGradient: const LinearGradient(colors: [
+                        Colors.white,
+                        Colors.white12,
+                      ]),
+
+                      // Filling Color for Countdown Widget.
+                      fillColor: Colors.transparent,
+
+                      // Filling Gradient for Countdown Widget.
+                      fillGradient: const LinearGradient(colors: [
+                        Colors.yellowAccent,
+                        Colors.greenAccent,
+                      ]),
+
+                      // Background Color for Countdown Widget.
+                      backgroundColor: const Color.fromARGB(255, 252, 232, 255),
+
+                      // Background Gradient for Countdown Widget.
+                      backgroundGradient: null,
+
+                      // Border Thickness of the Countdown Ring.
+                      strokeWidth: 10.0,
+
+                      // Begin and end contours with a flat edge and no extension.
+                      strokeCap: StrokeCap.round,
+
+                      // Text Style for Countdown Text.
+                      textStyle: const TextStyle(
+                        fontSize: 33.0,
+                        color: Colors.black,
+                        fontWeight: FontWeight.bold,
+                      ),
+
+                      // Format for the Countdown Text.
+                      textFormat: CountdownTextFormat.S,
+
+                      isReverse: true,
+
+                      isReverseAnimation: false,
+
+                      isTimerTextShown: true,
+
+                      // Handles the timer start.
+                      autoStart: true,
+
+                      onStart: () {
+                        // Here, do whatever you want
+                        debugPrint('Countdown Started');
+                      },
+
+                      onComplete: () {
+                        // Here, do whatever you want
+                        debugPrint('Countdown Ended');
+                      },
+
+                      onChange: (String timeStamp) {
+                        debugPrint('Countdown Changed $timeStamp');
+                      },
+                    ),
+                  );
+                  // return Center(child: Text(gameProvider.countdown.toString()));
                 }
 
                 if (gameProvider.isLoading) {
@@ -69,10 +154,9 @@ class _GameScreenState extends State<GameScreen> {
                         Center(
                           child: Image.asset(
                             'assets/logo/game_logo.png',
-                            height: 150,
+                            height: 110,
                           ),
                         ),
-                        const SizedBox(height: 10),
                         // if (width < 600)
                         //   PhoneSize(gameProvider)
                         // if (width > 600)
@@ -267,9 +351,9 @@ class _GameScreenState extends State<GameScreen> {
         boxShadow: [
           BoxShadow(
             color: Colors.grey.withOpacity(0.3),
-            spreadRadius: 2,
-            blurRadius: 7,
-            offset: const Offset(0, 3),
+            spreadRadius: 0.2,
+            blurRadius: 2,
+            offset: const Offset(0, 1),
           ),
         ],
       ),
@@ -282,7 +366,9 @@ class _GameScreenState extends State<GameScreen> {
           const SizedBox(height: 20),
 
           Container(
-            padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 80),
+            padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 80),
+            width: double.infinity,
+            height: 300,
             decoration: BoxDecoration(
               color: Colors.blue[50],
               gradient: const LinearGradient(

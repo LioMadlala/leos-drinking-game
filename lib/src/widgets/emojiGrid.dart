@@ -42,6 +42,7 @@ class _ImojiGridState extends State<ImojiGrid> {
 
   selectTheFirstEmoji(GameProvider gameProvider) {
     gameProvider.newUserImoji == imageList[0];
+    gameProvider.updateNewUserImoji(imageList[0]);
     updateSelection(0);
   }
 
